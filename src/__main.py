@@ -10,7 +10,6 @@ clock = pygame.Clock()
 
 dt = 0
 
-
 while Running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
