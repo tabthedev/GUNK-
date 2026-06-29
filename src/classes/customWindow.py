@@ -4,8 +4,8 @@ from pyglet.graphics import Batch
 batch = Batch()
 
 class CustomWindow:
-    def __init__(self, windowCaption="GUNK!", initSize=(1280,720), initPos=(0,0), initFullscreen=False, initBorderless=True, initResizable=False):
-        self.window = Window(width=initSize[0], height=initSize[1], caption=windowCaption, fullscreen=initFullscreen, resizable=initResizable, style=initBorderless and Window.WINDOW_STYLE_DIALOG or Window.WINDOW_STYLE_OVERLAY)
+    def __init__(self, windowCaption="GUNK!", initSize=(1280,720), initPos=(0,0), initFullscreen=False, initResizable=False, initStyle=Window.WINDOW_STYLE_DIALOG):
+        self.window = Window(width=initSize[0], height=initSize[1], caption=windowCaption, fullscreen=initFullscreen, resizable=initResizable, style=initStyle)
         self.window.set_location(x=initPos[0], y=initPos[1])
         pass
     
