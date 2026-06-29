@@ -1,29 +1,11 @@
-import time
-import pygame
+import pyglet
 from src.classes import customWindow
 
-Running = True
+window = customWindow.CustomWindow(initPos=(500,500))
+batch = customWindow.batch
 
-clock = pygame.Clock()
-
-window = customWindow.CustomWindow()
-
-dt = 0
-
-while Running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            # Running = False
-            break
-        elif event.type == pygame.WINDOWLEAVE:
-            print("나가지 마세요")
-
-    window._screen.fill("purple")
-
-    window.setPosition((512, 512))
+@window.window.event
+def on_draw():
     window.update()
-    window2.update()
 
-    dt = clock.tick(60)/1000
-
-pygame.quit()
+pyglet.app.run()
