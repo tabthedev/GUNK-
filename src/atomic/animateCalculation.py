@@ -6,6 +6,13 @@ tickrate = 120
 
 tickSpent = 0
 
+fps = 0
+
+def FPSdecrement():
+    clock.clock.sleep(1000000)
+    global fps
+    fps -= 1
+
 def WaitTicks(tick=1):
     curTick = tickSpent
     while curTick+tick > tickSpent:
@@ -14,9 +21,10 @@ def WaitTicks(tick=1):
 
 
 def TickCalculation():
-    global deltaTime, tickSpent
+    global deltaTime, tickSpent, fps
     deltaTime = clock.clock.update_time()
     tickSpent += 1
+    fps += 1
     
     clock.clock.sleep(1000000/tickrate)
 
