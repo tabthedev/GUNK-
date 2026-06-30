@@ -10,6 +10,6 @@ def on_draw():
     mainWindow.clear()
     batch.batch.draw()
         
-windows.InitWindowLocationAtom(mainWindow, True, (0,32))
+windows.InitWindowLocationAtom(mainWindow, True, (500,32))
 
 pyglet.app.run()
