@@ -31,10 +31,20 @@ def InitWindowLocationAtom(window=mainWindow, initialActivated=False, initialLoc
     WLFixThread.start()
 
 
-def AnimateWindowLocation(window=mainWindow, locationFrom=(0,0), locationTo=(128,128), ignoreLocationFix=False):
-    if not ignoreLocationFix and LocationFixedAtomByWindow[window].get():
+def AnimateWindowLocation(window=mainWindow, locationFrom=(0,0), locationTo=(128,128), duration=1, ignoreLocationFix=False):
+    locationFixedAtom = LocationFixedAtomByWindow[window]
+    locationAtom = LocationAtomByWindow[window]
+    
+    if not locationFixedAtom or not locationAtom:
+        pass
+
+    if not ignoreLocationFix and locationFixedAtom.get():
         pass
     
+    xFrom,yFrom,xTo,yTo = locationFrom[0], locationFrom[1], locationTo[0], locationTo[1]
+    
+
+
 
 # class CustomWindow:
 #     def __init__(self, windowCaption="GUNK!", initSize=(1280,720), initPos=(0,0), initFullscreen=False, initResizable=False, initStyle=Window.WINDOW_STYLE_DIALOG):
