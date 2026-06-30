@@ -11,4 +11,13 @@ def on_draw():
     batch.batch.draw()
         
 
-pyglet.app.run()pyglet.app.run()
+mainWindowLocationAtom = Atom((0,32))
+
+mainWindowFixThread = Thread(target=windows.FixWindowLocation, kwargs={'locationAtom':mainWindowLocationAtom})
+mainWindowFixThread.daemon = True
+mainWindowFixThread.start()
+
+pyglet.app.run()
+
+
+mainWindow.set_location
