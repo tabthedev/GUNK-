@@ -14,9 +14,14 @@ def FPSdecrement():
     fps -= 1
 
 def WaitTicks(tick=1):
-    curTick = tickSpent
-    while curTick+tick > tickSpent:
-        continue
+    # curTick = tickSpent
+    # while curTick+tick > tickSpent:
+    #     continue
+    dtS = 0
+    for i in range(tick):
+        dtS += clock.clock.tick()
+
+    return dtS
 
 
 
