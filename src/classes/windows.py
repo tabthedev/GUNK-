@@ -1,7 +1,16 @@
 # from src.classes import batch
+from src.atomic import Atom
 from pyglet import window
 
 mainWindow = window.Window(width=1920, height=1080, caption="GUNK!", resizable=False, style=window.Window.WINDOW_STYLE_DIALOG)
+
+def FixWindowLocation(window=mainWindow, locationAtom=Atom.Atom((0,0))):
+    while True:
+        p = locationAtom.get()
+        window.set_location(p[0], p[1])
+
+def AnimateWindowLocation(window=mainWindow, locationFrom=(0,0), locationTo=(128,128)):
+    
 
 # class CustomWindow:
 #     def __init__(self, windowCaption="GUNK!", initSize=(1280,720), initPos=(0,0), initFullscreen=False, initResizable=False, initStyle=Window.WINDOW_STYLE_DIALOG):
