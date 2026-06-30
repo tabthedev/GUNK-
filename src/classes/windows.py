@@ -3,7 +3,7 @@ from src.atomic import Atom, animateCalculation
 from pyglet import window
 from threading import Thread
 
-mainWindow = window.Window(width=1920, height=1080, caption="GUNK!", resizable=False, style=window.Window.WINDOW_STYLE_DIALOG)
+mainWindow = window.Window(width=512, height=512, caption="GUNK!", resizable=False, style=window.Window.WINDOW_STYLE_DIALOG)
 
 LocationFixedAtomByWindow = {}
 LocationAtomByWindow = {}
