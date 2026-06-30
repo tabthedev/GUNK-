@@ -1,22 +1,43 @@
 import pyglet
+from threading import Thread
 from src.atomic import animateCalculation
 from src.classes import batch, windows
 
 mainWindow = windows.mainWindow
 
-@mainWindow.event
+
+# fpsLabel = pyglet.text.Label(f'FPS: {animateCalculation.fps}',
+#     font_size=32,
+#     x=16,y=16,
+#     anchor_x='left', anchor_y='top',
+#     color=(255,255,255),
+#     batch=batch.batch
+# )
+
+fpsLabel = pyglet.window.FPSDisplay(mainWindow, (255,255,255))
+    
+
+# @mainWindow.event
 def on_draw():
     mainWindow.clear()
 
-    fpsLabel = pyglet.text.Label(f'FPS: {animateCalculation.fps}',
-        font_size=32,
-        x=16,y=16,
-        anchor_x='left', anchor_y='top'
-                                 )
-    fpsLabel.text
-
+    # fpsLabel.text = f"FPS: {animateCalculation.fps}"
     batch.batch.draw()
+    fpsLabel.draw()
+    
+    print(animateCalculation.fps, animateCalculation.tickSpent, animateCalculation.deltaTime)
+
+def drawLoop():
+    while True:
+        on_draw()
+        animateCalculation.WaitTicks()
+
         
-windows.InitWindowLocationAtom(mainWindow, True, (500,32))
+
+windows.InitWindowLocationAtom(mainWindow, True, (64,64))
+
+mainThread = Thread(target=drawLoop)
+mainThread.daemon = True
+mainThread.start()
 
 pyglet.app.run()
