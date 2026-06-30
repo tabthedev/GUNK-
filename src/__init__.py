@@ -18,6 +18,3 @@ mainWindowFixThread.daemon = True
 mainWindowFixThread.start()
 
 pyglet.app.run()
-
-
-mainWindow.set_location
