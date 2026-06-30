@@ -2,7 +2,7 @@ from threading import Thread
 from src.classes import clock
 
 deltaTime = 0
-tickrate = 60
+tickrate = 120
 
 tickSpent = 0
 
