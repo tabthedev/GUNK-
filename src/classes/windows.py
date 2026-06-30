@@ -15,7 +15,7 @@ def FixWindowLocation(window=mainWindow):
 
     while True:
         if not locationFixedAtom.get():
-            pass
+            continue
         p = locationAtom.get()
         window.set_location(p[0], p[1])
 
