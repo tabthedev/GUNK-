@@ -20,8 +20,8 @@ def FixWindowLocation(window=mainWindow):
         animateCalculation.WaitTicks()
 
 def InitWindowLocationAtom(window=mainWindow, initialActivated=False, initialLocation=(0,0)):
-    activatedAtom = Atom(initialActivated)
-    locationAtom = Atom(initialLocation)
+    activatedAtom = Atom.Atom(initialActivated)
+    locationAtom = Atom.Atom(initialLocation)
 
     LocationFixedAtomByWindow[window] = activatedAtom
     LocationAtomByWindow[window] = locationAtom
