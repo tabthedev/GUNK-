@@ -6,8 +6,8 @@ from threading import Thread
 
 mainWindow = window.Window(width=1920, height=1080, caption="GUNK!", resizable=False, style=window.Window.WINDOW_STYLE_DIALOG)
 
-LocationFixedAtomByWindow: dict[window.BaseWindow, Atom[bool]] = {}
-LocationAtomByWindow: dict[window.BaseWindow, Atom[tuple[int,int]]] = {}
+LocationFixedAtomByWindow = {}
+LocationAtomByWindow = {}
 
 def FixWindowLocation(window=mainWindow):
     locationFixedAtom = LocationFixedAtomByWindow[window]
