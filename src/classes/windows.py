@@ -2,11 +2,22 @@
 from src.atomic import Atom
 from src.classes import clock
 from pyglet import window
+from threading import Thread
 
 mainWindow = window.Window(width=1920, height=1080, caption="GUNK!", resizable=False, style=window.Window.WINDOW_STYLE_DIALOG)
 
 LocationFixedAtomByWindow: dict[window.BaseWindow, Atom[bool]] = {}
 LocationAtomByWindow: dict[window.BaseWindow, Atom[tuple[int,int]]] = {}
+
+def FixWindowLocation():
+    locationFixedAtom = LocationFixedAtomByWindow[window]
+    locationAtom = LocationAtomByWindow[window]
+
+    while True:
+        if not locationFixedAtom.get():
+            pass
+        p = locationAtom.get()
+        window.set_location(p[0], p[1])
 
 def InitWindowLocationAtom(window=mainWindow, initialActivated=False, initialLocation=(0,0)):
     activatedAtom = Atom(initialActivated)
@@ -15,11 +26,10 @@ def InitWindowLocationAtom(window=mainWindow, initialActivated=False, initialLoc
     LocationFixedAtomByWindow[window] = activatedAtom
     LocationAtomByWindow[window] = locationAtom
 
-    while True:
-        if not activatedAtom.get():
-            pass
-        p = locationAtom.get()
-        window.set_location(p[0], p[1])
+    WLFixThread = Thread(target=FixWindowLocation)
+    WLFixThread.daemon = True
+    WLFixThread.start()
+
 
 def AnimateWindowLocation(window=mainWindow, locationFrom=(0,0), locationTo=(128,128), ignoreLocationFix=False):
     if not ignoreLocationFix and LocationFixedAtomByWindow[window].get():
