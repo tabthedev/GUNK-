@@ -5,8 +5,19 @@ from pyglet import window
 
 mainWindow = window.Window(width=1920, height=1080, caption="GUNK!", resizable=False, style=window.Window.WINDOW_STYLE_DIALOG)
 
-def FixWindowLocation(window=mainWindow, locationAtom=Atom.Atom((0,0))):
+LocationFixedAtomByWindow: dict[window.BaseWindow, Atom[bool]] = {}
+LocationAtomByWindow: dict[window.BaseWindow, Atom[tuple[int,int]]] = {}
+
+def InitWindowLocationAtom(window=mainWindow, initialActivated=False, initialLocation=(0,0)):
+    activatedAtom = Atom(initialActivated)
+    locationAtom = Atom(initialLocation)
+
+    LocationFixedAtomByWindow[window] = activatedAtom
+    LocationAtomByWindow[window] = locationAtom
+
     while True:
+        if not activatedAtom.get():
+            pass
         p = locationAtom.get()
         window.set_location(p[0], p[1])
 
