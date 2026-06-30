@@ -1,11 +1,14 @@
 import pyglet
-from src.classes import customWindow
+from threading import Thread
+from src.atomic.Atom import Atom
+from src.classes import batch, clock, windows
 
-window = customWindow.CustomWindow(initPos=(500,500))
-batch = customWindow.batch
+mainWindow = windows.mainWindow
 
-@window.window.event
+@mainWindow.event
 def on_draw():
-    window.update()
+    mainWindow.clear()
+    batch.batch.draw()
+        
 
-pyglet.app.run()
+pyglet.app.run()pyglet.app.run()
