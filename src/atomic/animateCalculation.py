@@ -11,11 +11,14 @@ def WaitTicks(tick=1):
     while curTick+tick > tickSpent:
         continue
 
+
+
 def TickCalculation():
     global deltaTime, tickSpent
     deltaTime = clock.clock.update_time()
     tickSpent += 1
-    clock.clock.sleep(1/tickrate)
+    
+    clock.clock.sleep(1000000/tickrate)
 
 animThread = Thread(target=TickCalculation)
 animThread.daemon = True
