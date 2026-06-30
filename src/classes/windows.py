@@ -1,6 +1,5 @@
 # from src.classes import batch
-from src.atomic import Atom
-from src.classes import clock
+from src.atomic import Atom, animateCalculation
 from pyglet import window
 from threading import Thread
 
@@ -18,6 +17,7 @@ def FixWindowLocation(window=mainWindow):
             continue
         p = locationAtom.get()
         window.set_location(p[0], p[1])
+        animateCalculation.WaitTicks()
 
 def InitWindowLocationAtom(window=mainWindow, initialActivated=False, initialLocation=(0,0)):
     activatedAtom = Atom(initialActivated)
