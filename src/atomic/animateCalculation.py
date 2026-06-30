@@ -2,7 +2,7 @@ from threading import Thread
 from src.classes import clock
 
 deltaTime = 0
-tickrate = 120
+tickrate = 144
 
 tickSpent = 0
 
@@ -26,12 +26,19 @@ def WaitTicks(tick=1):
 
 
 def TickCalculation():
-    global deltaTime, tickSpent, fps
-    deltaTime = clock.clock.update_time()
-    tickSpent += 1
-    fps += 1
-    
-    clock.clock.sleep(1000000/tickrate)
+    while True:
+        global deltaTime, tickSpent, fps
+        deltaTime = 0
+        while deltaTime < 1/tickrate:
+            deltaTime += WaitTicks()
+        tickSpent += 1
+        fps += 1
+
+        fpsDecrementThr = Thread(target=FPSdecrement)
+        fpsDecrementThr.daemon = True
+        fpsDecrementThr.start()
+
+        print(fps, tickSpent, deltaTime)
 
 animThread = Thread(target=TickCalculation)
 animThread.daemon = True
