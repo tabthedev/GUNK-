@@ -9,7 +9,7 @@ mainWindow = window.Window(width=1920, height=1080, caption="GUNK!", resizable=F
 LocationFixedAtomByWindow: dict[window.BaseWindow, Atom[bool]] = {}
 LocationAtomByWindow: dict[window.BaseWindow, Atom[tuple[int,int]]] = {}
 
-def FixWindowLocation():
+def FixWindowLocation(window=mainWindow):
     locationFixedAtom = LocationFixedAtomByWindow[window]
     locationAtom = LocationAtomByWindow[window]
 
@@ -26,7 +26,7 @@ def InitWindowLocationAtom(window=mainWindow, initialActivated=False, initialLoc
     LocationFixedAtomByWindow[window] = activatedAtom
     LocationAtomByWindow[window] = locationAtom
 
-    WLFixThread = Thread(target=FixWindowLocation)
+    WLFixThread = Thread(target=FixWindowLocation, args=[window])
     WLFixThread.daemon = True
     WLFixThread.start()
 
