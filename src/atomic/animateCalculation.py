@@ -1,5 +1,5 @@
 from threading import Thread
-from src.classes import clock
+from src.classes import clock, windows
 
 deltaTime = 0
 tickrate = 144
@@ -38,7 +38,6 @@ def TickCalculation():
         fpsDecrementThr.daemon = True
         fpsDecrementThr.start()
 
-        print(fps, tickSpent, deltaTime)
 
 animThread = Thread(target=TickCalculation)
 animThread.daemon = True
