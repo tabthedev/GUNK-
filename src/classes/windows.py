@@ -2,6 +2,7 @@
 from src.atomic import Atom, animateCalculation
 from pyglet import window
 from threading import Thread
+from math import floor
 
 mainWindow = window.Window(width=512, height=512, caption="GUNK!", resizable=False, style=window.Window.WINDOW_STYLE_DIALOG)
 
@@ -42,6 +43,19 @@ def AnimateWindowLocation(window=mainWindow, locationFrom=(0,0), locationTo=(128
         pass
     
     xFrom,yFrom,xTo,yTo = locationFrom[0], locationFrom[1], locationTo[0], locationTo[1]
+
+    timeSpent = 0
+    while timeSpent < duration:
+        timeSpent += animateCalculation.WaitTicks()
+        if timeSpent > duration:
+            timeSpent = duration
+        locationAtom.set(
+            (
+                floor(xFrom + timeSpent/duration * (xTo - xFrom)),
+                floor(yFrom + timeSpent/duration * (yTo - yFrom))
+            )
+        )
+
     
 
 

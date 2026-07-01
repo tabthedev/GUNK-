@@ -1,7 +1,7 @@
 import pyglet
 from threading import Thread
 from src.atomic import animateCalculation
-from src.classes import batch, windows
+from src.classes import batch, clock, windows
 
 mainWindow = windows.mainWindow
 
@@ -17,7 +17,7 @@ mainWindow = windows.mainWindow
 fpsLabel = pyglet.window.FPSDisplay(mainWindow, (255,255,255))
     
 
-# @mainWindow.event
+@mainWindow.event
 def on_draw():
     mainWindow.clear()
 
@@ -25,19 +25,17 @@ def on_draw():
     batch.batch.draw()
     fpsLabel.draw()
     
-    print(animateCalculation.fps, animateCalculation.tickSpent, animateCalculation.deltaTime)
+    # print(animateCalculation.fps, animateCalculation.tickSpent, animateCalculation.deltaTime)
 
-def drawLoop():
-    while True:
-        on_draw()
-        animateCalculation.WaitTicks()
 
-        
 
 windows.InitWindowLocationAtom(mainWindow, True, (64,64))
 
-mainThread = Thread(target=drawLoop)
-mainThread.daemon = True
-mainThread.start()
+def WindowMoveTest():
+    clock.clock.sleep(5000000)
+    windows.AnimateWindowLocation(window=mainWindow, locationFrom=(0,0), locationTo=(512,512), duration=5, ignoreLocationFix=True)
+
+a = Thread(target=WindowMoveTest)
+a.start()
 
 pyglet.app.run()
